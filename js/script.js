@@ -117,10 +117,10 @@ window.onload = function() {
   __('lastyear').innerHTML = lastYear;
   __('nextyear').innerHTML = lastYear + 2;
   
-	__('label-seconds').innerHTML = 'of ' + yearLengthSeconds + ' seconds or';
-	__('label-minutes').innerHTML = 'of ' + yearLengthMinutes + ' minutes or';
-	__('label-hours').innerHTML = 'of ' + yearLengthHours + ' hours or';
-	__('label-days').innerHTML = 'of ' + yearLengthDays + ' days since';
+	__('label-seconds').innerHTML = 'of ' + dots(yearLengthSeconds) + ' seconds or';
+	__('label-minutes').innerHTML = 'of ' + dots(yearLengthMinutes) + ' minutes or';
+	__('label-hours').innerHTML = 'of ' + dots(yearLengthHours) + ' hours or';
+	__('label-days').innerHTML = 'of ' + dots(yearLengthDays) + ' days since';
   
   display();
   running = window.setInterval(display, 1000);

@@ -1,4 +1,7 @@
 @media screen and (max-width:500px) {
+	html {
+		font-size:12pt;
+	}
 	section {
 		margin:1em;
 		width:auto;

@@ -124,7 +124,7 @@ window.onload = function() {
 
 __('switch').onclick = function() {
 	switch(which) {
-		case 'elapsed': 
+		case 'elapsed':
 			which = 'remaining';
 			__('switch').innerHTML = 'show elapsed';
 			__('label-days').innerHTML = 'of ' + yearLengthDays + ' days to';
@@ -137,6 +137,22 @@ __('switch').onclick = function() {
 			__('lastyear').innerHTML = thisYear - 1;
 		break;
 	}
+	
+	ids = ['seconds', 'minutes', 'hours', 'days', 'lastyear'];
+	
+	for (key in ids) {
+		__(ids[key]).style.opacity = 0;
+		__(ids[key]).style.transform = 'translateY(-0.5em)';
+		__(ids[key]).style.transition = '';
+	}
+	
+	window.setTimeout(function() {
+		for (key in ids) {
+			__(ids[key]).style.opacity = 1;
+			__(ids[key]).style.transform = 'translateY(0)';
+			__(ids[key]).style.transition = '0.3s';
+		}
+	}, 100);
 	
 	display();
 };

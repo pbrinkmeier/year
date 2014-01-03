@@ -106,7 +106,7 @@ window.onload = function() {
   yearLengthSeconds = Math.round(yearLengthMilliseconds/1000);
   yearLengthMinutes = Math.round(yearLengthSeconds/60);
   yearLengthHours = Math.round(yearLengthMinutes/60);
-  yearLengthDays = Math.round(yearLengthHours/60);
+  yearLengthDays = Math.round(yearLengthHours/24);
   
   __('lastyear').innerHTML = lastYear;
   __('nextyear').innerHTML = lastYear + 2;

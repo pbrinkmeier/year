@@ -120,7 +120,7 @@ window.onload = function() {
 	__('label-seconds').innerHTML = 'of ' + dots(yearLengthSeconds) + ' seconds or';
 	__('label-minutes').innerHTML = 'of ' + dots(yearLengthMinutes) + ' minutes or';
 	__('label-hours').innerHTML = 'of ' + dots(yearLengthHours) + ' hours or';
-	__('label-days').innerHTML = 'of ' + dots(yearLengthDays) + ' days since';
+	__('label-days').innerHTML = 'of ' + yearLengthDays + ' days since';
   
   display();
   running = window.setInterval(display, 1000);

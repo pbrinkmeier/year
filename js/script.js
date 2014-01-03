@@ -56,6 +56,18 @@ function withS(number) {
 	}
 }
 
+function dots(number) {
+	//got 2 do sth here
+
+	return number;
+}
+
+function comma(number) {
+	number += '';
+	
+	return number.replace('.', ',');
+}
+
 function __(id) {
 	return document.getElementById(id);
 }
@@ -63,37 +75,47 @@ function __(id) {
 function display() {
 	var now = new Date();
 	
-	var percentage = myRound(100 * (diffMilliseconds(now, firstJan)/getYearLength(lastYear + 1)), 2) + '%';
+	var percentage = myRound(100 * (diffMilliseconds(now, firstJan)/yearLengthMilliseconds), 2) + '%';
 	
 	var seconds = Math.floor(diffSeconds(now, firstJan));
 	var minutes =  Math.floor(diffMinutes(now, firstJan));
 	var hours = Math.floor(diffHours(now, firstJan));
 	var days = myRound(diffDays(now, firstJan), 1);
 	
-	__('percentage').innerHTML = percentage;
+	__('percentage').innerHTML = comma(percentage);
 	__('bar').style.width = percentage;
 	
-	__('seconds').innerHTML = seconds;
-	__('label-seconds').innerHTML = 'second' + (withS(seconds)?'s':'') + ' or';
+	__('seconds').innerHTML = dots(seconds);
 	
-	__('minutes').innerHTML = minutes;
-	__('label-minutes').innerHTML = 'minute' + (withS(minutes)?'s':'') + ' or';
+	__('minutes').innerHTML = dots(minutes);
 	
-	__('hours').innerHTML = hours;
-	__('label-hours').innerHTML = 'hour' + (withS(hours)?'s':'') + ' or';
+	__('hours').innerHTML = dots(hours);
 	
-	__('days').innerHTML = days;
-	__('label-days').innerHTML = 'day' + (withS(days)?'s':'') + ' since';
+	__('days').innerHTML = comma(days);
 	
+	//clear on nye
+	if (diffMilliseconds(now, firstJan) > yearLengthMilliseconds) {
+		window.clearInterval(running);
+	}
 }
 
 window.onload = function() {
   lastYear = (new Date()).getFullYear() - 1;
   firstJan = new Date(lastYear + 1, 0, 1);
+  yearLengthMilliseconds = getYearLength(lastYear + 1);
+  yearLengthSeconds = Math.round(yearLengthMilliseconds/1000);
+  yearLengthMinutes = Math.round(yearLengthSeconds/60);
+  yearLengthHours = Math.round(yearLengthMinutes/60);
+  yearLengthDays = Math.round(yearLengthHours/60);
   
   __('lastyear').innerHTML = lastYear;
   __('nextyear').innerHTML = lastYear + 2;
   
+	__('label-seconds').innerHTML = 'of ' + yearLengthSeconds + ' seconds or';
+	__('label-minutes').innerHTML = 'of ' + yearLengthMinutes + ' minutes or';
+	__('label-hours').innerHTML = 'of ' + yearLengthHours + ' hours or';
+	__('label-days').innerHTML = 'of ' + yearLengthDays + ' days since';
+  
   display();
-  window.setInterval(display, 1000);
+  running = window.setInterval(display, 1000);
 };

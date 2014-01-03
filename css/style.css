@@ -20,6 +20,7 @@ section {
 	background-color:white;
 	text-align:center;
 }
+
 #progress {
 	margin-top:0.5em;
 	display:block;
@@ -40,17 +41,20 @@ section {
 
 #percentage {
 	color:#888;
-	font-size:0.8em;
+	font-size:0.8rem;
 }
 
 #time {
 	border:8px solid black;
 	text-align:right;
+	color:#888;
 }
 
 .number {
+	margin:.5rem;
 	font-family:Raleway;
 	font-size:3em;
 	font-weight:300;
 	text-align:center;
+	color:black;
 }

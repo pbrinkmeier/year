@@ -48,22 +48,16 @@ function getYearLength(year) {
 	return days * 24 * 60 * 60 * 1000;
 }
 
-function dots(nStr) {
+function addCommas(nStr) {
     nStr += '';
     x = nStr.split('.');
     x1 = x[0];
-    x2 = x.length > 1 ? ',' + x[1] : '';
+    x2 = x.length > 1 ? '.' + x[1] : '';
     var rgx = /(\d+)(\d{3})/;
     while (rgx.test(x1)) {
-        x1 = x1.replace(rgx, '$1' + '.' + '$2');
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
     }
     return x1 + x2;
-}
-
-function comma(number) {
-	number += '';
-	
-	return number.replace('.', ',');
 }
 
 function __(id) {
@@ -87,16 +81,16 @@ function display() {
 		days = yearLengthDays - days;
 	}
 	
-	__('percentage').innerHTML = comma(percentage);
+	__('percentage').innerHTML = percentage;
 	__('bar').style.width = percentage;
 	
-	__('seconds').innerHTML = dots(seconds);
+	__('seconds').innerHTML = addCommas(seconds);
 	
-	__('minutes').innerHTML = dots(minutes);
+	__('minutes').innerHTML = addCommas(minutes);
 	
-	__('hours').innerHTML = dots(hours);
+	__('hours').innerHTML = addCommas(hours);
 	
-	__('days').innerHTML = comma(days);
+	__('days').innerHTML = days;
 	
 	//clear on nye
 	if (diffMilliseconds(now, firstJan) > yearLengthMilliseconds) {
@@ -119,9 +113,9 @@ window.onload = function() {
 	__('lastyear').innerHTML = thisYear - 1;
 	__('thisyear').innerHTML = thisYear;
 
-	__('label-seconds').innerHTML = 'of ' + dots(yearLengthSeconds) + ' seconds or';
-	__('label-minutes').innerHTML = 'of ' + dots(yearLengthMinutes) + ' minutes or';
-	__('label-hours').innerHTML = 'of ' + dots(yearLengthHours) + ' hours or';
+	__('label-seconds').innerHTML = 'of ' + addCommas(yearLengthSeconds) + ' seconds or';
+	__('label-minutes').innerHTML = 'of ' + addCommas(yearLengthMinutes) + ' minutes or';
+	__('label-hours').innerHTML = 'of ' + addCommas(yearLengthHours) + ' hours or';
 	__('label-days').innerHTML = 'of ' + yearLengthDays + ' days since';
 
 	display();

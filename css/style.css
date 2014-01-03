@@ -1,29 +1,56 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway:300);
+
 * {
 	margin:0;
 	padding:0;
 }
 
 html {
-	min-height:100%;
-	
-	font:14pt, serif;
+	font:16pt Georgia;
 }
 
 body {
-	background-color:#222;
-	color:white;
+	background-color:#ddd;
+}
+
+section {
+	margin:1em auto;
+	padding:1em;
+	width:400px;
+	background-color:white;
+	text-align:center;
+}
+#progress {
+	margin-top:0.5em;
+	display:block;
+	position:relative;
+	height:0.2em;
+	background-color:black;
+}
+
+#bar {
+	display:block;
+	position:absolute;
+	left:0;
+	top:0;
+	bottom:0;
+	width:0;
+	background-color:hsl(0,80%,60%);
+}
+
+#percentage {
+	color:#888;
+	font-size:0.8em;
 }
 
 #time {
-	padding:1rem;
-	font-size:4em;
+	border:8px solid black;
+	text-align:right;
 }
 
-#time div {
-	margin-left:1em;
-}
-
-#time div[id*=label-] {
-	font-size:0.5em;
-	margin:0;
+.number {
+	font-family:Raleway;
+	font-size:3em;
+	font-weight:300;
+	text-align:center;
 }

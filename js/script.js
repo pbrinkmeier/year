@@ -18,6 +18,36 @@ function diffDays(date1, date2) {
   return diffHours(date1, date2)/24;
 }
 
+function myRound(number, places) {
+	return Math.round(number*Math.pow(10, places))/Math.pow(10, places);
+}
+
+function isLeapYear(year) {
+	var isLeapYear = false;
+	
+	if (year % 4 == 0) {
+		isLeapYear = true;
+	}
+	if (year % 100 == 0) {
+		isLeapYear = false;
+	}
+	if (year % 400 == 0) {
+		isLeapYear = true;
+	}
+	
+	return isLeapYear;
+}
+
+function getYearLength(year) {
+	var days = 365;
+	
+	if (isLeapYear(year)) {
+		days++;
+	}
+	
+	return days * 24 * 60 * 60 * 1000;
+}
+
 function withS(number) {
 	if (Math.floor(number) == 1) {
 		return false;
@@ -31,12 +61,17 @@ function __(id) {
 }
 
 function display() {
-	now = new Date();
+	var now = new Date();
 	
-	seconds = Math.floor(diffSeconds(now, firstJan));
-	minutes =  Math.floor(diffMinutes(now, firstJan));
-	hours = Math.floor(diffHours(now, firstJan));
-	days = Math.floor(diffDays(now, firstJan));
+	var percentage = myRound(100 * (diffMilliseconds(now, firstJan)/getYearLength(lastYear + 1)), 2) + '%';
+	
+	var seconds = Math.floor(diffSeconds(now, firstJan));
+	var minutes =  Math.floor(diffMinutes(now, firstJan));
+	var hours = Math.floor(diffHours(now, firstJan));
+	var days = myRound(diffDays(now, firstJan), 1);
+	
+	__('percentage').innerHTML = percentage;
+	__('bar').style.width = percentage;
 	
 	__('seconds').innerHTML = seconds;
 	__('label-seconds').innerHTML = 'second' + (withS(seconds)?'s':'') + ' or';
@@ -54,9 +89,10 @@ function display() {
 
 window.onload = function() {
   lastYear = (new Date()).getFullYear() - 1;
-  firstJan = new Date(lastYear + 1, 0, 1)
+  firstJan = new Date(lastYear + 1, 0, 1);
   
   __('lastyear').innerHTML = lastYear;
+  __('nextyear').innerHTML = lastYear + 2;
   
   display();
   window.setInterval(display, 1000);

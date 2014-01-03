@@ -80,6 +80,13 @@ function display() {
 	var hours = Math.floor(diffHours(now, firstJan));
 	var days = myRound(diffDays(now, firstJan), 1);
 	
+	if (which == 'remaining') {
+		seconds = yearLengthSeconds - seconds;
+		minutes = yearLengthMinutes - minutes;
+		hours = yearLengthHours - hours;
+		days = yearLengthDays - days;
+	}
+	
 	__('percentage').innerHTML = comma(percentage);
 	__('bar').style.width = percentage;
 	
@@ -98,22 +105,44 @@ function display() {
 }
 
 window.onload = function() {
-  thisYear = (new Date()).getFullYear();
-  firstJan = new Date(thisYear, 0, 1);
-  yearLengthMilliseconds = getYearLength(thisYear);
-  yearLengthSeconds = Math.round(yearLengthMilliseconds/1000);
-  yearLengthMinutes = Math.round(yearLengthSeconds/60);
-  yearLengthHours = Math.round(yearLengthMinutes/60);
-  yearLengthDays = Math.round(yearLengthHours/24);
-  
-  __('lastyear').innerHTML = thisYear - 1;
-  __('thisyear').innerHTML = thisYear;
-  
+	which = 'elapsed';
+	__('switch').innerHTML = 'show remaining';
+
+	thisYear = (new Date()).getFullYear();
+	firstJan = new Date(thisYear, 0, 1);
+	yearLengthMilliseconds = getYearLength(thisYear);
+	yearLengthSeconds = Math.round(yearLengthMilliseconds/1000);
+	yearLengthMinutes = Math.round(yearLengthSeconds/60);
+	yearLengthHours = Math.round(yearLengthMinutes/60);
+	yearLengthDays = Math.round(yearLengthHours/24);
+
+	__('lastyear').innerHTML = thisYear - 1;
+	__('thisyear').innerHTML = thisYear;
+
 	__('label-seconds').innerHTML = 'of ' + dots(yearLengthSeconds) + ' seconds or';
 	__('label-minutes').innerHTML = 'of ' + dots(yearLengthMinutes) + ' minutes or';
 	__('label-hours').innerHTML = 'of ' + dots(yearLengthHours) + ' hours or';
 	__('label-days').innerHTML = 'of ' + yearLengthDays + ' days since';
-  
-  display();
-  running = window.setInterval(display, 1000);
+
+	display();
+	running = window.setInterval(display, 1000);
+};
+
+__('switch').onclick = function() {
+	switch(which) {
+		case 'elapsed': 
+			which = 'remaining';
+			__('switch').innerHTML = 'show elapsed';
+			__('label-days').innerHTML = 'of ' + yearLengthDays + ' days to';
+			__('lastyear').innerHTML = thisYear + 1;
+		break;
+		case 'remaining':
+			which = 'elapsed';
+			__('switch').innerHTML = 'show remaining';
+			__('label-days').innerHTML = 'of ' + yearLengthDays + ' days since';
+			__('lastyear').innerHTML = thisYear - 1;
+		break;
+	}
+	
+	display();
 };

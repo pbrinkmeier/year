@@ -58,3 +58,8 @@ section {
 	text-align:center;
 	color:black;
 }
+
+#switch {
+	text-decoration:underline;
+	cursor:pointer;
+}

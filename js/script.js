@@ -48,14 +48,6 @@ function getYearLength(year) {
 	return days * 24 * 60 * 60 * 1000;
 }
 
-function withS(number) {
-	if (Math.floor(number) == 1) {
-		return false;
-	} else {
-		return true;
-	}
-}
-
 function dots(nStr) {
     nStr += '';
     x = nStr.split('.');
@@ -106,16 +98,16 @@ function display() {
 }
 
 window.onload = function() {
-  lastYear = (new Date()).getFullYear() - 1;
-  firstJan = new Date(lastYear + 1, 0, 1);
-  yearLengthMilliseconds = getYearLength(lastYear + 1);
+  thisYear = (new Date()).getFullYear();
+  firstJan = new Date(thisYear, 0, 1);
+  yearLengthMilliseconds = getYearLength(thisYear);
   yearLengthSeconds = Math.round(yearLengthMilliseconds/1000);
   yearLengthMinutes = Math.round(yearLengthSeconds/60);
   yearLengthHours = Math.round(yearLengthMinutes/60);
   yearLengthDays = Math.round(yearLengthHours/24);
   
-  __('lastyear').innerHTML = lastYear;
-  __('nextyear').innerHTML = lastYear + 2;
+  __('lastyear').innerHTML = thisYear - 1;
+  __('thisyear').innerHTML = thisYear;
   
 	__('label-seconds').innerHTML = 'of ' + dots(yearLengthSeconds) + ' seconds or';
 	__('label-minutes').innerHTML = 'of ' + dots(yearLengthMinutes) + ' minutes or';

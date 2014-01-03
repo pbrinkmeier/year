@@ -1,0 +1,29 @@
+* {
+	margin:0;
+	padding:0;
+}
+
+html {
+	min-height:100%;
+	
+	font:14pt, serif;
+}
+
+body {
+	background-color:#222;
+	color:white;
+}
+
+#time {
+	padding:1rem;
+	font-size:4em;
+}
+
+#time div {
+	margin-left:1em;
+}
+
+#time div[id*=label-] {
+	font-size:0.5em;
+	margin:0;
+}
